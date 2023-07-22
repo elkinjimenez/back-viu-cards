@@ -27,6 +27,10 @@ public class UserService {
     return repository.save(user);
   }
 
+  public User login(User user) {
+    return repository.findByEmailAndPassword(user.getEmail(), user.getPassword());
+  }
+
   // DIFERENTES AL CRUD
 
   public User findByEmail(String email) {
