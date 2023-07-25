@@ -19,7 +19,7 @@ import com.co.viucards.services.UserService;
 import com.co.viucards.utils.GeneralResponse;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("api/user")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
 
