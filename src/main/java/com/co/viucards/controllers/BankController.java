@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.co.viucards.models.Bank;
+import com.co.viucards.models.User;
 import com.co.viucards.services.BankService;
+import com.co.viucards.services.UserService;
 import com.co.viucards.utils.GeneralResponse;
 
 @RestController
@@ -23,10 +25,24 @@ public class BankController {
   @Autowired
   private BankService service;
 
-  @GetMapping("findByIdUser")
-  public ResponseEntity<GeneralResponse<List<Bank>>> getList(@RequestParam("idUser") Integer idUser) {
+  @Autowired
+  private UserService serviceUser;
+
+  @GetMapping("findByEmailUser")
+  public ResponseEntity<GeneralResponse<List<Bank>>> findByEmailUser(
+      @RequestParam(name = "email", required = false) String email) {
     try {
-      List<Bank> listFindByIdUser = service.findByIdUser(idUser);
+      if (email == null) {
+        GeneralResponse<List<Bank>> response = GeneralResponse.error("El campo email es obligatorio.");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+      }
+      User exits = serviceUser.findByEmail(email);
+      if (exits == null) {
+        GeneralResponse<List<Bank>> response = GeneralResponse
+            .error("No se encuentra usuario con el email consultado.");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+      }
+      List<Bank> listFindByIdUser = service.findByIdUser(exits.getId());
       GeneralResponse<List<Bank>> response = GeneralResponse.success(listFindByIdUser);
       return new ResponseEntity<>(response, HttpStatus.OK);
     } catch (Exception e) {

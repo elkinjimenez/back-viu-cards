@@ -25,4 +25,12 @@ public class GeneralResponse<T> {
     return response;
   }
 
+  public static <T> GeneralResponse<T> error(String error) {
+    GeneralResponse<T> response = new GeneralResponse<>();
+    response.setMessage(error);
+    response.setCode(400);
+    response.setData(null);
+    return response;
+  }
+
 }
