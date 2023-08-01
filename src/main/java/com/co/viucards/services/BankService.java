@@ -18,4 +18,14 @@ public class BankService {
     return this.repository.findByIdUser(idUser);
   }
 
+  public List<Bank> findByIdUserAndName(Integer idUser, String name) {
+    return this.repository.findByIdUserAndName(idUser, name);
+  }
+
+  public Bank create(Bank bank) {
+    bank.setIdLanguaje(1);
+    bank.setState(1);
+    return repository.save(bank);
+  }
+
 }

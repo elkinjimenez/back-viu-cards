@@ -9,4 +9,6 @@ public interface BankRepository extends JpaRepository<Bank, Integer> {
 
   List<Bank> findByIdUser(Integer idUser);
 
+  List<Bank> findByIdUserAndName(Integer idUser, String name);
+
 }
