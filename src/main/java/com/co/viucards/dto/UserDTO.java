@@ -10,7 +10,7 @@ import lombok.Setter;
 public class UserDTO {
   private String firstName;
   private String lastName;
-  private String image;
+  private byte[] image;
   private String email;
   private Integer state;
   private Date date;

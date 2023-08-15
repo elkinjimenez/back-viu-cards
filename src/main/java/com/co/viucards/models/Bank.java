@@ -23,7 +23,8 @@ public class Bank {
 
   private String description;
 
-  private String image;
+  @Column(columnDefinition = "LONGBLOB")
+  private byte[] image;
 
   private Integer state;
 

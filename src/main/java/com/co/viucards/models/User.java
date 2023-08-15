@@ -27,7 +27,8 @@ public class User {
   @Column(name = "last_name")
   private String lastName;
 
-  private String image;
+  @Column(columnDefinition = "LONGBLOB")
+  private byte[] image;
 
   private String email;
 
