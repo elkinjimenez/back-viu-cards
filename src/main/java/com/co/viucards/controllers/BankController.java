@@ -114,4 +114,27 @@ public class BankController {
     }
   }
 
+  @GetMapping("delete")
+  public ResponseEntity<GeneralResponse<Boolean>> delete(
+      @RequestParam(name = "idBank", required = false) Integer idBank) {
+    try {
+      if (idBank == null) {
+        GeneralResponse<Boolean> response = GeneralResponse.error("El campo idBank es obligatorio.");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+      }
+      Boolean isDeleted = service.deleteById(idBank);
+      if (isDeleted) {
+        GeneralResponse<Boolean> response = GeneralResponse.success(true);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+      } else {
+        GeneralResponse<Boolean> errorResponse = GeneralResponse
+            .error("No se logró eliminar el banco correctamente. Por favor intente de nuevo.");
+        return new ResponseEntity<>(errorResponse, HttpStatus.OK);
+      }
+    } catch (Exception e) {
+      GeneralResponse<Boolean> errorResponse = GeneralResponse.error("Error: " + e.getMessage());
+      return new ResponseEntity<>(errorResponse, HttpStatus.OK);
+    }
+  }
+
 }

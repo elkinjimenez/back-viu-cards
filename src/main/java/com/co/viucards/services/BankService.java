@@ -28,4 +28,13 @@ public class BankService {
     return repository.save(bank);
   }
 
+  public Boolean deleteById(Integer idBank) {
+    try {
+      repository.deleteById(idBank);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
 }
