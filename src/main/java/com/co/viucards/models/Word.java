@@ -28,6 +28,9 @@ public class Word {
   @Column(columnDefinition = "LONGBLOB")
   private byte[] image;
 
+  @Column(name = "retention_level")
+  private Integer retentionLevel;
+
   private Date date;
 
   @Column(name = "id_bank")

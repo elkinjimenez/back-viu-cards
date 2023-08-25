@@ -2,6 +2,7 @@ package com.co.viucards.services;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,17 @@ public class WordService {
     return repository.findByIdBank(idBank);
   }
 
+  public Optional<Word> findById(Integer id) {
+    return repository.findById(id);
+  }
+
   public Word create(Word word) {
     word.setDate(new Date());
-    return repository.save(word);
+    return repository.saveAndFlush(word);
+  }
+
+  public Word update(Word word) {
+    return this.repository.saveAndFlush(word);
   }
 
   public Boolean deleteById(Integer idWord) {
